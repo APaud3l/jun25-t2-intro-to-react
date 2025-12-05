@@ -14,23 +14,25 @@ const Name = styled.h3`
     font-size: 1.1rem;
 `
 // Using props
-export default function DevCard({name, role, seniority}) {
+// export default function DevCard({name, role, seniority}) {
+//   // const name = "Alice";
+//   return (
+//     <Card>
+//       <Name>{name}</Name>
+//       <p>{role}</p>
+//       <small>{seniority}</small>
+//     </Card>
+//   );
+// }
+
+// Using the idea of props:children
+function DevCard({ children }) {
   // const name = "Alice";
   return (
     <Card>
-      <Name>{name}</Name>
-      <p>{role}</p>
-      <small>{seniority}</small>
+      {children}
     </Card>
   );
 }
 
-// Using the idea of props:children
-// export default function DevCard({ children }) {
-//   // const name = "Alice";
-//   return (
-//     <Card>
-//       {children}
-//     </Card>
-//   );
-}
+export {DevCard, Name};
