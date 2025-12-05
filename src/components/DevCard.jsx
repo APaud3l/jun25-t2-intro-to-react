@@ -13,13 +13,24 @@ const Name = styled.h3`
     color: #890e0eff;
     font-size: 1.1rem;
 `
-
-export default function DevCard() {
-  const name = "Alice";
+// Using props
+export default function DevCard({name, role, seniority}) {
+  // const name = "Alice";
   return (
     <Card>
       <Name>{name}</Name>
-      <p>Loves Node, is now learning React.</p>
+      <p>{role}</p>
+      <small>{seniority}</small>
     </Card>
   );
+}
+
+// Using the idea of props:children
+// export default function DevCard({ children }) {
+//   // const name = "Alice";
+//   return (
+//     <Card>
+//       {children}
+//     </Card>
+//   );
 }
