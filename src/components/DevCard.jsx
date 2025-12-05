@@ -26,10 +26,10 @@ const Name = styled.h3`
 // }
 
 // Using the idea of props:children
-function DevCard({ children }) {
+function DevCard({ highlighted, children }) {
   // const name = "Alice";
   return (
-    <Card>
+    <Card style={{ borderColor: highlighted ? '#ff0000ff' : '#434343' }}>
       {children}
     </Card>
   );

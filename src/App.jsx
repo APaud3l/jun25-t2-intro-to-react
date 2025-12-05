@@ -41,7 +41,7 @@ function App() {
         ))
         } */}
 
-        <DevCard>
+        <DevCard highlighted>
           <Name>Alice</Name>
           <p>Loves Node, now learning React.</p>
           <small>Senior Developer</small>
