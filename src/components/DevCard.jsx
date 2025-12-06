@@ -1,4 +1,6 @@
+import { useState } from 'react';
 import styled from 'styled-components';
+
 
 const Card = styled.div`
     border: 1px solid #434343;
@@ -15,7 +17,14 @@ const Name = styled.h3`
 `
 // Using props
 export default function DevCard({name, role, seniority, isMentor}) {
-  // const name = "Alice";
+  // const [constName, functionThatSetsTheValue ] = useState(default_value)
+  const [isFavourite, setIsFavourite] = useState(false);
+
+  function handleToggleFavourite() {
+    setIsFavourite((prev)=> !prev);
+  }
+
+
   return (
     <Card>
       <Name>{name}</Name>
@@ -29,6 +38,13 @@ export default function DevCard({name, role, seniority, isMentor}) {
           </span>
         )
       }
+      <button onClick={handleToggleFavourite}>
+        {
+          isFavourite ? "Remove as favourite" : "Add as Favourite"
+        }
+      </button>
+
+      <Options seniority={seniority}  />
     </Card>
   );
 }
