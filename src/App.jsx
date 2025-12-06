@@ -30,7 +30,7 @@ const devs = [
 function App() {
   return (
     <>
-      <Header />
+      <Header name="user" />
       <main>
         {/* Using Props */}
         {
