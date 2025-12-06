@@ -14,25 +14,33 @@ const Name = styled.h3`
     font-size: 1.1rem;
 `
 // Using props
-// export default function DevCard({name, role, seniority}) {
-//   // const name = "Alice";
-//   return (
-//     <Card>
-//       <Name>{name}</Name>
-//       <p>{role}</p>
-//       <small>{seniority}</small>
-//     </Card>
-//   );
-// }
-
-// Using the idea of props:children
-function DevCard({ highlighted, children }) {
+export default function DevCard({name, role, seniority, isMentor}) {
   // const name = "Alice";
   return (
-    <Card style={{ borderColor: highlighted ? '#ff0000ff' : '#434343' }}>
-      {children}
+    <Card>
+      <Name>{name}</Name>
+      <p>{role}</p>
+      <small>{seniority}</small>
+      {
+        // condition && <Something />
+        isMentor && (
+          <span style={{ margin: "0.5rem", color: "#9d0958ff" }}>
+            ⭐Mentor
+          </span>
+        )
+      }
     </Card>
   );
 }
+
+// Using the idea of props:children
+// function DevCard({ highlighted, children }) {
+//   // const name = "Alice";
+//   return (
+//     <Card style={{ borderColor: highlighted ? '#ff0000ff' : '#434343' }}>
+//       {children}
+//     </Card>
+//   );
+// }
 
 export {DevCard, Name};
