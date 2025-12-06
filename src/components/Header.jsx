@@ -1,5 +1,6 @@
 import { useTheme } from "../context/ThemeContext";
 import Hello from "./Hello";
+import Timer from "./Timer";
 
 function Header({ name }) {
 
@@ -13,6 +14,7 @@ function Header({ name }) {
       <h1>Welcome to Dev Community {year}!</h1>
       <p>Theme: {theme}</p>
       <button onClick={toggleTheme}>Toggle Theme</button>
+      <Timer />
     </header>
   );
 }
