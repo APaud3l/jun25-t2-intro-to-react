@@ -30,8 +30,12 @@ const devs = [
 
 function App() {
   // const [query, setQuery] = useState("");
-const [inputQuery, setInputQuery] = useState("");
-const [activeQuery, setActiveQuery] = useState("");
+  const [inputQuery, setInputQuery] = useState("");
+  const [activeQuery, setActiveQuery] = useState("");
+  const [devList, setDevList] = useState(devs);
+
+  const [newName, setNewName] = useState("");
+  const [newRole, setNewRole] = useState("");
 
   return (
     <>
@@ -49,16 +53,65 @@ const [activeQuery, setActiveQuery] = useState("");
         </label>
       </div> */}
 
+      {/* Form element: Adding a new Dev */}
+      <form
+        onSubmit={(event) => {
+          event.preventDefault();
+          // Input validation on front-end: Required properties are needed to add a new role
+          if (!newName.trim() || !newRole.trim()) return;
+
+          // Define a new Dev element
+          const newDev = {
+            id: Date.now(),
+            name: newName,
+            role: newRole,
+            seniority: "Junior",
+            isMentor: false,
+          };
+
+          setDevList((prev) => [...prev, newDev]);
+          // Add the new dev to the start of the list
+          setDevList((prev) => [newDev, ...prev]);
+          // Reset the name and role from the form
+          setNewName("");
+          setNewRole("");
+        }}
+      >
+        <h2>Add a Dev</h2>
+        <div>
+          <label>
+            Name:{" "}
+            <input
+              type="text"
+              value={newName}
+              onChange={(event) => setNewName(event.target.value)}
+              placeholder="Dev Name"
+            />
+          </label>
+        </div>
+
+        <div>
+          <label>
+            Role:{" "}
+            <input
+              type="text"
+              value={newRole}
+              onChange={(event) => setNewRole(event.target.value)}
+              placeholder="Dev Role"
+            />
+          </label>
+        </div>
+        <button type="submit">Add Dev</button>
+      </form>
+
       {/* Filtering using form element */}
-        <form
-          onSubmit={
-            (event) => {
-              event.preventDefault();
-              setActiveQuery(inputQuery);
-              console.log("Search submitted: ", inputQuery);
-            }
-          }
-        >
+      <form
+        onSubmit={(event) => {
+          event.preventDefault();
+          setActiveQuery(inputQuery);
+          console.log("Search submitted: ", inputQuery);
+        }}
+      >
         <label>
           Search devs:{" "}
           <input
@@ -69,14 +122,14 @@ const [activeQuery, setActiveQuery] = useState("");
           />
         </label>
         <button type="submit">Search</button>
-        </form>
-
-
+      </form>
 
       <main>
         {/* Using Props */}
-        {devs
-          .filter((dev) => dev.name.toLowerCase().includes(activeQuery.toLowerCase()))
+        {devList
+          .filter((dev) =>
+            dev.name.toLowerCase().includes(activeQuery.toLowerCase())
+          )
           .map((dev) => (
             <DevCard
               key={dev.id}
