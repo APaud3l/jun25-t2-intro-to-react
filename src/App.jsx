@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { act, useState } from "react";
 import { DevCard, Name } from "./components/DevCard.jsx";
 import Footer from "./components/Footer.jsx";
 import Header from "./components/Header.jsx";
@@ -29,12 +29,15 @@ const devs = [
 ];
 
 function App() {
-  const [query, setQuery] = useState("");
+  // const [query, setQuery] = useState("");
+const [inputQuery, setInputQuery] = useState("");
+const [activeQuery, setActiveQuery] = useState("");
 
   return (
     <>
       <Header name="user" />
-      <div>
+      {/* Filtering using div */}
+      {/* <div>
         <label>
           Search devs:{" "}
           <input
@@ -44,11 +47,36 @@ function App() {
             onChange={(event) => setQuery(event.target.value)}
           />
         </label>
-      </div>
+      </div> */}
+
+      {/* Filtering using form element */}
+        <form
+          onSubmit={
+            (event) => {
+              event.preventDefault();
+              setActiveQuery(inputQuery);
+              console.log("Search submitted: ", inputQuery);
+            }
+          }
+        >
+        <label>
+          Search devs:{" "}
+          <input
+            type="text"
+            value={inputQuery}
+            placeholder="Type a name..."
+            onChange={(event) => setInputQuery(event.target.value)}
+          />
+        </label>
+        <button type="submit">Search</button>
+        </form>
+
+
+
       <main>
         {/* Using Props */}
         {devs
-          .filter((dev) => dev.name.toLowerCase().includes(query.toLowerCase()))
+          .filter((dev) => dev.name.toLowerCase().includes(activeQuery.toLowerCase()))
           .map((dev) => (
             <DevCard
               key={dev.id}
