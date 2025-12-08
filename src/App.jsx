@@ -2,6 +2,7 @@ import { React, useState } from "react";
 import { DevCard, Name } from "./components/DevCard.jsx";
 import Footer from "./components/Footer.jsx";
 import Header from "./components/Header.jsx";
+import AddDevForm from "./components/AddDevForm.jsx";
 
 // Let's say we have some info we got from the database
 const devs = [
@@ -34,8 +35,12 @@ function App() {
   const [activeQuery, setActiveQuery] = useState("");
   const [devList, setDevList] = useState(devs);
 
-  const [newName, setNewName] = useState("");
-  const [newRole, setNewRole] = useState("");
+  
+  const handleAddDev = (newDev) => {
+    setDevList((prev) => [...prev, newDev]);
+    // Add the new dev to the start of the list
+    // setDevList((prev) => [newDev, ...prev]);
+  };
 
   return (
     <>
@@ -53,56 +58,8 @@ function App() {
         </label>
       </div> */}
 
-      {/* Form element: Adding a new Dev */}
-      <form
-        onSubmit={(event) => {
-          event.preventDefault();
-          // Input validation on front-end: Required properties are needed to add a new role
-          if (!newName.trim() || !newRole.trim()) return;
-
-          // Define a new Dev element
-          const newDev = {
-            id: Date.now(),
-            name: newName,
-            role: newRole,
-            seniority: "Junior",
-            isMentor: false,
-          };
-
-          setDevList((prev) => [...prev, newDev]);
-          // Add the new dev to the start of the list
-          setDevList((prev) => [newDev, ...prev]);
-          // Reset the name and role from the form
-          setNewName("");
-          setNewRole("");
-        }}
-      >
-        <h2>Add a Dev</h2>
-        <div>
-          <label>
-            Name:{" "}
-            <input
-              type="text"
-              value={newName}
-              onChange={(event) => setNewName(event.target.value)}
-              placeholder="Dev Name"
-            />
-          </label>
-        </div>
-
-        <div>
-          <label>
-            Role:{" "}
-            <input
-              type="text"
-              value={newRole}
-              onChange={(event) => setNewRole(event.target.value)}
-              placeholder="Dev Role"
-            />
-          </label>
-        </div>
-        <button type="submit">Add Dev</button>
-      </form>
+      {/* Form component: Adding a new Dev */}
+      <AddDevForm onAddDev={handleAddDev} />
 
       {/* Filtering using form element */}
       <form
