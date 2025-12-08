@@ -1,4 +1,4 @@
-import { act, useState } from "react";
+import { React, useState } from "react";
 import { DevCard, Name } from "./components/DevCard.jsx";
 import Footer from "./components/Footer.jsx";
 import Header from "./components/Header.jsx";
