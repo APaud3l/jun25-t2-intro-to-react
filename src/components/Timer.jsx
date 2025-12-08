@@ -12,12 +12,13 @@ class Timer extends React.Component {
     }, 1000);
   }
 
-  componentDidUpdate(prevProps, prevState) {
-    // Called after every update.
-    console.log(prevState);
-    console.log(prevProps);
-    console.log("Second changed!");
-  }
+  // Commented to prevent cluttering in console
+  // componentDidUpdate(prevProps, prevState) {
+  //   // Called after every update.
+  //   console.log(prevState);
+  //   console.log(prevProps);
+  //   console.log("Second changed!");
+  // }
 
   componentWillUnmount() {
     // Do something

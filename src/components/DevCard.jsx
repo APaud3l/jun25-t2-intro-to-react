@@ -26,8 +26,13 @@ export default function DevCard({ name, role, seniority, isMentor }) {
     setIsFavourite((prev) => !prev);
   }
 
+  const handleCardClick = () => {
+    console.log(`Clicked dev: ${name} ${role}`);
+  };
+
   return (
     <Card
+      onClick={handleCardClick}
       style={{
         background: theme === "dark" ? "#2b1f1fff" : "#cfb7b7ff",
         color: theme === "dark" ? "#ffffff" : "#000000",

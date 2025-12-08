@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { DevCard, Name } from "./components/DevCard.jsx";
 import Footer from "./components/Footer.jsx";
 import Header from "./components/Header.jsx";
@@ -28,22 +29,35 @@ const devs = [
 ];
 
 function App() {
+  const [query, setQuery] = useState("");
+
   return (
     <>
       <Header name="user" />
+      <div>
+        <label>
+          Search devs:{" "}
+          <input
+            type="text"
+            value={query}
+            placeholder="Type a name..."
+            onChange={(event) => setQuery(event.target.value)}
+          />
+        </label>
+      </div>
       <main>
         {/* Using Props */}
-        {
-        devs.map((dev) => (
-          <DevCard 
-            key={dev.id}
-            name={dev.name}
-            role={dev.role}
-            seniority={dev.seniority}
-            isMentor={dev.isMentor}
-          />
-        ))
-        }
+        {devs
+          .filter((dev) => dev.name.toLowerCase().includes(query.toLowerCase()))
+          .map((dev) => (
+            <DevCard
+              key={dev.id}
+              name={dev.name}
+              role={dev.role}
+              seniority={dev.seniority}
+              isMentor={dev.isMentor}
+            />
+          ))}
 
         {/* Implementing props.children + props IDEA */}
         {/* <DevCard highlighted>
